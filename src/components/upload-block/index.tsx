@@ -3,13 +3,16 @@ import { Box, Typography, Button } from '@mui/material';
 
 import { Icon } from 'components/icon';
 import { ENUM_ICON } from 'enums/icons';
+import { useAppDispatch } from 'store/hooks';
+import { sendFileToServer } from 'store/files/files.slice';
 
 import { UploadBlockWrapper, InnerWrapper } from './styles';
 
-export const UplaodBlock = () => {
+export const UploadBlock = () => {
    const inputRef = useRef<HTMLInputElement | null>(null);
+   const dispatch = useAppDispatch();
+
    const [dragIsOver, setDragIsOver] = useState(false);
-   const [uploaded, setUploaded] = useState<FileList | null>(null);
 
    const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
       event.preventDefault();
@@ -23,7 +26,29 @@ export const UplaodBlock = () => {
 
    const handleDrop = (event: DragEvent<HTMLDivElement>) => {
       event.preventDefault();
+      const files = event.dataTransfer.files;
+      const formData = new FormData();
+
+      for (let i = 0; i < files.length; i++) {
+         const file = files[i];
+         formData.append('file', file);
+      }
+      dispatch(sendFileToServer(formData));
       setDragIsOver(false);
+   };
+
+   const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault();
+      const files = event.target.files;
+
+      if (files) {
+         const formData = new FormData();
+         for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            formData.append('file', file);
+         }
+         dispatch(sendFileToServer(formData));
+      }
    };
 
    const handleInputClick = () => {
@@ -31,13 +56,7 @@ export const UplaodBlock = () => {
          inputRef.current.click();
       }
    };
-   console.log('uploaded', uploaded);
 
-   const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const files = event.target.files;
-      setUploaded(files);
-   };
-   console.log('dragIsOver', dragIsOver);
    return (
       <UploadBlockWrapper>
          <InnerWrapper
@@ -60,7 +79,6 @@ export const UplaodBlock = () => {
                   type='file'
                   accept='.pdf, image/*'
                   hidden
-                  multiple
                   ref={inputRef}
                   onChange={handleFileInputChange}
                />
