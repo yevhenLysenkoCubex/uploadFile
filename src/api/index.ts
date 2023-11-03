@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const scodixAiInstance = axios.create({
+const instance = axios.create({
    baseURL: process.env.REACT_APP_API_URL,
    headers: {
       Accept: 'application/json',
@@ -8,6 +8,6 @@ const scodixAiInstance = axios.create({
 });
 
 const bearerToken = process.env.REACT_APP_APP_TOKEN;
-scodixAiInstance.defaults.headers.common['Authorization'] = `Bearer ${bearerToken}`;
+instance.defaults.headers.common['Authorization'] = `Bearer ${bearerToken}`;
 
-export default scodixAiInstance;
+export default instance;

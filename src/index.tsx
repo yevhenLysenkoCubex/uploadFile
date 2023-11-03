@@ -5,13 +5,13 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 
 import App from './App';
 import { scodixAiTheme } from 'styles/theme';
-import scodixAiStore from './store';
+import instance from './store';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
    <React.StrictMode>
-      <Provider store={scodixAiStore}>
+      <Provider store={instance}>
          <ThemeProvider theme={scodixAiTheme}>
             <CssBaseline />
             <App />
