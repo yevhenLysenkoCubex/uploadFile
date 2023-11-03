@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box } from '@mui/material';
 
 import { MainWrapper } from './styles';
 import { Appbar } from 'components/appbar';

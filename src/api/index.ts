@@ -1,14 +1,13 @@
 import axios from 'axios';
 
 const scodixAiInstance = axios.create({
-   baseURL: 'https://api.scodix.org',
+   baseURL: process.env.REACT_APP_API_URL,
    headers: {
       Accept: 'application/json',
    },
 });
 
-const bearerToken =
-   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUyLCJpYXQiOjE2OTgzMjY2ODYsImV4cCI6MzMyNTUyNzg2ODZ9.z9JfwHXNe9Q-iAgPdF35hWXU1QRFoaH-Au6d8OtEqEQ';
+const bearerToken = process.env.REACT_APP_APP_TOKEN;
 scodixAiInstance.defaults.headers.common['Authorization'] = `Bearer ${bearerToken}`;
 
 export default scodixAiInstance;

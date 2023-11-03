@@ -25,7 +25,7 @@ export const InnerWrapper = styled(({ children, ...props }: InnerWrapperProps) =
    height: '100%',
    display: 'flex',
    background: dragisover === 'false' ? '#fff' : 'rgba(190, 167, 113, 0.05)',
-   border: dragisover === 'false' ? '1px dashed #DFDFDF' : '1px dashed red',
+   border: dragisover === 'false' ? 'none' : '1px dashed #DFDFDF',
    justifyContent: 'center',
    alignItems: 'center',
    flexDirection: 'column',
